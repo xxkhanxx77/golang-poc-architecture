@@ -10,7 +10,7 @@ type User struct {
 	ID          primitive.ObjectID `bson:"_id"`
 	Name        *string            `bson:"name"`
 	PhoneNumber *string            `bson:"phone_number"`
-	Eamil       *string            `bson:"email"`
+	Email       *string            `bson:"email"`
 
 	CreateDate *time.Time `bson:"created_at"`
 	UpdateDate *time.Time `bson:"updated_at"`

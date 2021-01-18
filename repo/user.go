@@ -25,7 +25,7 @@ func (r *Repo) User() (*entity.User, error) {
 		ID:          primitive.NewObjectID(),
 		Name:        toPStr("xx"),
 		PhoneNumber: toPStr("095"),
-		Eamil:       toPStr("kk@gmail.com")}
+		Email:       toPStr("kk@gmail.com")}
 	collection := r.client.Database("baac_db").Collection("users")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
@@ -47,4 +47,17 @@ func (r *Repo) User() (*entity.User, error) {
 
 func toPStr(v string) *string {
 	return &v
+}
+
+func (r *Repo) CreateUser(user *entity.User) (*entity.User, error) {
+	collection := r.client.Database("baacbanking").Collection("users")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	_, err := collection.InsertOne(ctx, user)
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
 }
