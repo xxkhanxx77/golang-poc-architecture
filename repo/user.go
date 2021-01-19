@@ -26,7 +26,7 @@ func (r *Repo) User() (*entity.User, error) {
 		Name:        toPStr("xx"),
 		PhoneNumber: toPStr("095"),
 		Eamil:       toPStr("kk@gmail.com")}
-	collection := r.client.Database("baacbanking").Collection("users")
+	collection := r.client.Database("baac_db").Collection("users")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()

@@ -1,0 +1,30 @@
+version: '3.5'
+services:
+  mongo:
+    container_name: baac_db
+    image: mongo:4.0.22-xenial
+    ports: 
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_DATABASE=baac_db
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=MEQaC#fJXgG
+    volumes:
+      - ./mongo-volume:/data/db
+    restart: always
+  
+  baac-api:
+    container_name: baac_api
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8080
+    depends_on: 
+      - mongo 
+    # volumes:
+    #   - ./:/app/
+    command: sh -c "sh /app/waitfor.sh;  ./main "
+
+
+    
